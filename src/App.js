@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Userinput from './components/userinput.js';
 
 class App extends Component {
   render() {
@@ -8,11 +9,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
 
-          <h1 className="App-title">Yelp</h1>
         </header>
-        <p className="App-intro">
-          THIS IS OUR YELP APP!
-        </p>
+        <Userinput />
       </div>
     );
   }
