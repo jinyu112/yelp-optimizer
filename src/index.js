@@ -6,6 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+require('dotenv').config();
+
 ReactDOM.render(
     <Router>
         <div>

@@ -1,30 +1,38 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import yelpApiService from './yelpApiService.js'
 
 class Userinput extends Component {
   constructor(props) {
     super(props)
-    this.state = {value: 'Type of Food'};
-
+    this.state = {
+        term: 'Term',
+        location: 'Location'
+    };
+    this.yelpApi = new yelpApiService();
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-      this.setState({value: event.target.value});
+  handleChange(e) {
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState(state);
   }
 
-  handleSubmit(event) {
-      alert('Searching for: ' + this.state.value);
-      event.preventDefault();
+  handleSubmit(e) {
+      this.yelpApi.getRestaurantData(this.state.term, this.state.location);
+      e.preventDefault();
   }
 
   render() {
+    const { term, location } = this.state;
     return (
       <div className="Userinput">
         <form onSubmit={this.handleSubmit}>
 
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" name="term" value={term} onChange={this.handleChange} />
+            <input type="text" name="location" value={location} onChange={this.handleChange}/>
 
             <input type="submit" value="Submit" />
         </form>
