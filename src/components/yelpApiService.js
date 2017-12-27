@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-class YelpApiService extends Component {
-  // Do API request
+class yelpApiService extends Component {
+
   getRestaurantData(term, location) {
-      return axios.post('http://localhost:4200/' + 'api', {
+      axios.post('http://localhost:4200/' + 'api', {
           term: term,
           location: location
       })
+      .then( response => {
+          console.log( response.data);
+      })
       .catch(err => console.log(err));
   };
+
 }
 
-export default YelpApiService
+export default yelpApiService
