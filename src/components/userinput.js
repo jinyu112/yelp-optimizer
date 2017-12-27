@@ -23,7 +23,7 @@ class Userinput extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // Do API requests and return a promise object to display results
+    // Do API requests and return a promise object to display results.
     // Probably need to change the yelpApi object name because this will end up being all the API requests (not just yelp)
     var promiseObj = this.yelpApi.getRestaurantData(this.state.term, this.state.location);
     promiseObj.then(function(data){
