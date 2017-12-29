@@ -13,6 +13,7 @@ class Userinput extends Component {
     this.yelpApi = new YelpApiService(this.state.resultsArray);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    
   }
 
   handleChange(e) {
@@ -23,15 +24,25 @@ class Userinput extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // Do API requests and return a promise object to display results
-    // Probably need to change the yelpApi object name because this will end up being all the API requests (not just yelp)
-    var promiseObj = this.yelpApi.getRestaurantData(this.state.term, this.state.location);
-    promiseObj.then(function(data){
-      console.log(data.data);
-      // Set the state in this component and re-render
-      this.setState({resultsArray: data.data});
-     }.bind(this));
-    
+
+    // Geocoding to convert user location input into lat/lon
+    var geocoder = require('../../node_modules/geocoder');    
+    geocoder.geocode(this.state.location, function (err, data) {
+      // Construct lat/long string from geocoder from user input
+      var locationLatLong = data.results[0].geometry.location.lat + ',' + data.results[0].geometry.location.lng;
+      
+      // Do API requests and return a promise object to display results
+      // Probably need to change the yelpApi object name because this will end up being all the API requests (not just yelp)    
+      var promiseObj = this.yelpApi.getRestaurantData(this.state.term, locationLatLong);
+      promiseObj.then(function (data) {
+        console.log(data.data);
+        // Set the state in this component and re-render
+        this.setState({ resultsArray: data.data });
+      }.bind(this));
+    }.bind(this));
+
+
+
   }
 
   render() {
