@@ -50,7 +50,7 @@ class Userinput extends Component {
     const { term, location } = this.state;
     var indents = [];
     for (var i = 0; i < ITINERARY_LENGTH; i++) {        
-        indents.push(<div> {this.state.resultsArray[i]} </div>);
+        indents.push(<div> {this.state.resultsArray[i]} <br/><br/></div>);
     }
 
     return (
@@ -60,7 +60,7 @@ class Userinput extends Component {
             <input type="text" name="location" value={location} onChange={this.handleChange}/>
             <input type="submit" value="Submit" />            
         </form>
-        <div> 
+        <div><br/>
             {indents}
         </div>
       </div>
